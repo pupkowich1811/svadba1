@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Свадьба Данила и Полины</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- === 1. ПРИГЛАШЕНИЕ === -->
+    <section id="invitation">
+      <h1>С любовью приглашаем вас</h1>
+      <p class="invitation-text">на свадьбу Данила и Полины!</p>
+      <p class="invitation-text">📅 22 ноября 2025 года</p>
+
+      <!-- Таймер обратного отсчёта -->
+      <div id="countdown" class="countdown">
+        <div class="countdown-item">
+          <span id="days">00</span>
+          <p>дней</p>
+        </div>
+        <div class="countdown-item">
+          <span id="hours">00</span>
+          <p>часов</p>
+        </div>
+        <div class="countdown-item">
+          <span id="minutes">00</span>
+          <p>минут</p>
+        </div>
+        <div class="countdown-item">
+          <span id="seconds">00</span>
+          <p>секунд</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === 2. МЕСТО ПРОВЕДЕНИЯ (ФОТО ЗАВЕДЕНИЯ) === -->
+    <section id="location">
+      <h2>Место проведения</h2>
+      <p>Ресторан «Бахус»</p>
+      <p>Трактовая улица, 33а, г. Чита</p>
+      <p>Начало в 16:00</p>
+
+      <!-- Фото заведения вместо карты -->
+      <div class="venue-photo">
+        <img src="rest.jpg" alt="Ресторан Бахус">
+      </div>
+    </section>
+
+    <!-- === 3. О НАС === -->
+    <section id="about">
+      <h2>О нас</h2>
+      <p>Мы — Данил и Полина. Наша история любви началась в 2020 году, и с каждым днём мы убеждаемся, что созданы друг для друга.</p>
+      <p>Нам очень важно, чтобы вы разделили с нами этот особенный день!</p>
+
+      <div class="couple-cards">
+        <div class="person-card">
+          <img src="danil.jpg" alt="Данил">
+          <h3>Данил</h3>
+          <p>Жених</p>
+        </div>
+        <div class="person-card">
+          <img src="polina.jpg" alt="Полина">
+          <h3>Полина</h3>
+          <p>Невеста</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === 4. ЦВЕТОВАЯ ГАММА === -->
+    <section id="color-scheme">
+      <h2>Цветовая гамма свадьбы</h2>
+      <p>Наша палитра вдохновлена осенью и теплом:</p>
+      <div class="color-palette">
+        <div class="color" style="background-color: #8b5a2b;" title="#8b5a2b"></div>
+        <div class="color" style="background-color: #d4a574;" title="#d4a574"></div>
+        <div class="color" style="background-color: #f0e6d2;" title="#f0e6d2"></div>
+        <div class="color" style="background-color: #5a4a42;" title="#5a4a42"></div>
+      </div>
+    </section>
+
+    <!-- === 5. ФОРМА RSVP === -->
+    <section id="rsvp">
+      <h2>Подтвердите своё участие</h2>
+      <p>Пожалуйста, ответьте до 1 ноября 2025 года</p>
+
+      <form class="rsvp-form" action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Ваше имя</label>
+          <input type="text" id="name" name="name" required placeholder="Иван Иванов">
+        </div>
+
+        <div class="form-group">
+          <label for="attendance">Будете ли вы на свадьбе?</label>
+          <div class="select-wrapper">
+            <select id="attendance" name="attendance" required>
+              <option value="">Выберите...</option>
+              <option value="yes">Да, с радостью!</option>
+              <option value="no">К сожалению, не смогу</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit">Отправить</button>
+        </div>
+      </form>
+    </section>
+
+  </div>
+
+  <!-- Скрипт таймера -->
+  <script>
+    const weddingDate = new Date('November 22, 2025 16:00:00').getTime();
+
+    const countdownInterval = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('countdown').innerHTML = '<p class="invitation-text">Свадьба уже началась! 💍</p>';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }, 1000);
+  </script>
+
+</body>
+</html>

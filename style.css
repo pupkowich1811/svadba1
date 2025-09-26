@@ -1,0 +1,295 @@
+/* === ОБЩИЕ СТИЛИ === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fffdf7;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  section {
+    padding: 60px 0;
+    text-align: center;
+  }
+  
+  h1, h2 {
+    margin-bottom: 20px;
+    color: #8b5a2b;
+    font-weight: normal;
+  }
+  
+  p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #5a4a42;
+  }
+  
+  /* === БЛОК: ПРИГЛАШЕНИЕ === */
+  #invitation {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+    color: white;
+    padding: 100px 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+  }
+  
+  #invitation h1 {
+    font-size: 36px;
+    color: white;
+  }
+  
+  .invitation-text {
+    color: white !important;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  /* === ТАЙМЕР === */
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .countdown-item span {
+    font-size: 32px;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 16px;
+    border-radius: 10px;
+    min-width: 70px;
+    color: white;
+    text-shadow: none;
+  }
+  
+  .countdown-item p {
+    margin-top: 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* === БЛОК: МЕСТО (ФОТО ЗАВЕДЕНИЯ) === */
+  #location {
+    background-color: #f8f4e9;
+  }
+  
+  .venue-photo img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-top: 20px;
+  }
+  
+  /* === БЛОК: О НАС === */
+  #about {
+    background-color: #fff;
+  }
+  
+  .couple-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+  
+  .person-card {
+    background: #f8f4e9;
+    padding: 20px;
+    border-radius: 12px;
+    width: 180px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .person-card img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #d4a574;
+    margin-bottom: 15px;
+  }
+  
+  .person-card h3 {
+    font-size: 20px;
+    color: #8b5a2b;
+    margin-bottom: 8px;
+  }
+  
+  /* === ЦВЕТОВАЯ ПАЛИТРА === */
+  #color-scheme {
+    background-color: #f0e6d2;
+  }
+  
+  .color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+  
+  .color {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border: 2px solid white;
+  }
+  
+  /* === ФОРМА RSVP === */
+  #rsvp {
+    background-color: #f8f4e9;
+  }
+  
+  .rsvp-form {
+    max-width: 500px;
+    margin: 30px auto 0;
+    text-align: left;
+  }
+  
+  .form-group {
+    margin-bottom: 25px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #5a4a42;
+    font-size: 17px;
+  }
+  
+  /* Красивое поле ввода */
+  .form-group input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #d4a574;
+    border-radius: 10px;
+    font-size: 17px;
+    font-family: 'Georgia', serif;
+    background-color: #fffdf7;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #8b5a2b;
+    box-shadow: 0 0 0 3px rgba(139, 90, 43, 0.2);
+  }
+  
+  /* Стилизация select */
+  .select-wrapper {
+    position: relative;
+  }
+  
+  .select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: #8b5a2b;
+    font-size: 14px;
+    pointer-events: none;
+  }
+  
+  .form-group select {
+    width: 100%;
+    padding: 14px 40px 14px 14px;
+    border: 2px solid #d4a574;
+    border-radius: 10px;
+    font-size: 17px;
+    font-family: 'Georgia', serif;
+    background-color: #fffdf7;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group select:focus {
+    outline: none;
+    border-color: #8b5a2b;
+    box-shadow: 0 0 0 3px rgba(139, 90, 43, 0.2);
+  }
+  
+  /* Красивая кнопка */
+  .form-group button {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(to right, #8b5a2b, #6a451f);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 19px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(139, 90, 43, 0.3);
+  }
+  
+  .form-group button:hover {
+    background: linear-gradient(to right, #6a451f, #5a3a18);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(139, 90, 43, 0.4);
+  }
+  
+  /* === АДАПТИВНОСТЬ === */
+  @media (max-width: 768px) {
+    section {
+      padding: 40px 0;
+    }
+  
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+    p { font-size: 16px; }
+    .invitation-text { font-size: 20px; }
+  
+    .couple-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .person-card {
+      width: 100%;
+      max-width: 250px;
+    }
+  
+    .countdown-item span { font-size: 24px; min-width: 60px; }
+    .countdown-item p { font-size: 12px; }
+  }
+  
+  @media (max-width: 480px) {
+    .container { padding: 0 15px; }
+    #invitation { padding: 70px 15px; }
+    .countdown { gap: 8px; }
+    .countdown-item span { font-size: 20px; min-width: 50px; padding: 8px 12px; }
+    .form-group input,
+    .form-group select {
+      padding: 12px;
+      font-size: 16px;
+    }
+    .form-group button { padding: 14px; font-size: 17px; }
+  }
