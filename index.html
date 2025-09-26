@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Свадьба Данила и Полины</title>
+  <title>Свадьба Данилы и Полины</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
     <!-- === 1. ПРИГЛАШЕНИЕ === -->
     <section id="invitation">
       <h1>С любовью приглашаем вас</h1>
-      <p class="invitation-text">на свадьбу Данила и Полины!</p>
+      <p class="invitation-text">на свадьбу Данилы и Полины!</p>
       <p class="invitation-text">📅 22 ноября 2025 года</p>
 
       <!-- Таймер обратного отсчёта -->
@@ -37,29 +37,46 @@
       </div>
     </section>
 
-    <!-- === 2. МЕСТО ПРОВЕДЕНИЯ (ФОТО ЗАВЕДЕНИЯ) === -->
+    <!-- === 2. МЕСТО ПРОВЕДЕНИЯ (СЛАЙДЕР ФОТО) === -->
     <section id="location">
       <h2>Место проведения</h2>
-      <p>Ресторан «Бахус»</p>
-      <p>Трактовая улица, 33а, г. Чита</p>
+      <p>Ресторан «Аромат»</p>
+      <p>Кастринская улица, 2а, 1 этаж</p>
       <p>Начало в 16:00</p>
 
-      <!-- Фото заведения вместо карты -->
-      <div class="venue-photo">
-        <img src="rest.jpg" alt="Ресторан Бахус">
+      <!-- Слайдер фото ресторана -->
+      <div class="venue-slider">
+        <div class="slider-container">
+          <img src="rest (1).webp" alt="Ресторан Аромат - зал 1" class="slide active">
+          <img src="rest (2).webp" alt="Ресторан Аромат - зал 2" class="slide">
+          <img src="rest (3).webp" alt="Ресторан Аромат - фасад" class="slide">
+          <img src="rest (4).webp" alt="Ресторан Аромат - банкет" class="slide">
+        </div>
+
+        <!-- Кнопки управления -->
+        <button class="slider-btn prev">❮</button>
+        <button class="slider-btn next">❯</button>
+
+        <!-- Индикаторы точек -->
+        <div class="dots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+          <span class="dot" data-index="3"></span>
+        </div>
       </div>
     </section>
 
     <!-- === 3. О НАС === -->
     <section id="about">
       <h2>О нас</h2>
-      <p>Мы — Данил и Полина. Наша история любви началась в 2020 году, и с каждым днём мы убеждаемся, что созданы друг для друга.</p>
+      <p>Мы — Данила и Полина. Наша история любви началась в 2020 году, и с каждым днём мы убеждаемся, что созданы друг для друга.</p>
       <p>Нам очень важно, чтобы вы разделили с нами этот особенный день!</p>
 
       <div class="couple-cards">
         <div class="person-card">
-          <img src="danil.jpg" alt="Данил">
-          <h3>Данил</h3>
+          <img src="danil.jpg" alt="Данила">
+          <h3>Данила</h3>
           <p>Жених</p>
         </div>
         <div class="person-card">
@@ -87,12 +104,12 @@
       <h2>Подтвердите своё участие</h2>
       <p>Пожалуйста, ответьте до 1 ноября 2025 года</p>
 
-      <form class="rsvp-form" action="#" method="POST">
+      <form class="rsvp-form" id="rsvp-form">
         <div class="form-group">
           <label for="name">Ваше имя</label>
           <input type="text" id="name" name="name" required placeholder="Иван Иванов">
         </div>
-
+      
         <div class="form-group">
           <label for="attendance">Будете ли вы на свадьбе?</label>
           <div class="select-wrapper">
@@ -103,7 +120,7 @@
             </select>
           </div>
         </div>
-
+      
         <div class="form-group">
           <button type="submit">Отправить</button>
         </div>
@@ -136,6 +153,87 @@
       document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
       document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
     }, 1000);
+  </script>
+
+  <!-- Скрипт слайдера -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
+      let currentSlide = 0;
+
+      // Функция показа слайда
+      function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        currentSlide = index;
+      }
+
+      // Переключение слайдов по кнопкам
+      prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      });
+
+      // Переключение по клику на точки
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          showSlide(index);
+        });
+      });
+
+      // Автоматическая смена слайдов каждые 4 секунды
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }, 4000);
+    });
+  </script>
+
+<script>
+    document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target);
+      const data = {
+        name: formData.get('name'),
+        attendance: formData.get('attendance')
+      };
+  
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Отправляю...';
+      btn.disabled = true;
+  
+      try {
+        const response = await fetch('/.netlify/functions/telegram', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+  
+        if (response.ok) {
+          alert('Спасибо! Ваш ответ отправлен ❤️');
+          e.target.reset();
+        } else {
+          alert('Ошибка отправки. Попробуйте позже.');
+        }
+      } catch (err) {
+        alert('Не удалось отправить. Проверьте интернет.');
+      } finally {
+        btn.textContent = 'Отправить';
+        btn.disabled = false;
+      }
+    });
   </script>
 
 </body>
