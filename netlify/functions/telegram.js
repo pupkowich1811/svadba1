@@ -1,7 +1,12 @@
 // netlify/functions/telegram.js
 
-const BOT_TOKEN = '8288274911:AAGuEGWP0j0gf6z2S9DogLlZtjUin9q2x0g'; // ← сюда вставь токен от @BotFather
-const CHAT_ID = '5266091692';     // ← сюда вставь свой Telegram ID
+// ID получателей (молодожёны)
+const RECIPIENTS = [
+  '1556013800', // DANILA
+  '761672485'   // Polya
+];
+
+const BOT_TOKEN = '8288274911:AAGuEGWP0j0gf6z2S9DogLlZtjUin9q2x0g'; // ← ЗАМЕНИ НА СВОЙ ТОКЕН ОТ @BotFather
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -16,23 +21,28 @@ exports.handler = async (event) => {
     if (attendance === 'yes') statusText = 'Да, с радостью!';
     if (attendance === 'no') statusText = 'К сожалению, не смогу';
 
-    const message = `💍 Новое подтверждение участия!\n\nИмя: ${name}\nОтвет: ${statusText}`;
+    const message = `💍 Новое подтверждение участия!\n\n👤 Имя: ${name}\n✅ Ответ: ${statusText}`;
+
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: 'HTML' })
-    });
+    // Отправляем сообщение каждому получателю
+    const promises = RECIPIENTS.map(chatId =>
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'HTML'
+        })
+      })
+    );
 
-    if (response.ok) {
-      return { statusCode: 200, body: 'OK' };
-    } else {
-      console.error('Ошибка Telegram API:', await response.text());
-      return { statusCode: 500, body: 'Ошибка отправки' };
-    }
+    await Promise.all(promises);
+
+    return { statusCode: 200, body: 'OK' };
   } catch (error) {
-    console.error('Ошибка обработки:', error);
-    return { statusCode: 500, body: 'Ошибка сервера' };
+    console.error('Ошибка:', error);
+    return { statusCode: 500, body: 'Ошибка отправки' };
   }
 };
